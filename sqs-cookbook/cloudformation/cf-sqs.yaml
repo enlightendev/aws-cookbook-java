@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "AWS CloudFormation Sample Template SQS_With_CloudWatch_Alarms: Sample template showing how to create an SQS queue with Amazon CloudWatch alarms on queue depth. **WARNING** This template creates an Amazon SQS queue and one or more Amazon CloudWatch alarms. You will be billed for the AWS resources used if you create a stack from this template."
+Parameters:
+  AlarmEmail:
+    Default: "nobody@amazon.com"
+    Description: "Email address to notify if operational problems arise"
+    Type: "String"
+  QueueName:
+    Type: String
+    Default: MySimpleQueue
+    Description: Enter queue name.
+
+Resources:
+  BasicQueue:
+    Type: "AWS::SQS::Queue"
+    Properties:
+      QueueName: !Ref QueueName
+
+Outputs:
+  QueueURL:
+    Description: "URL of newly created SQS Queue"
+    Value:
+      Ref: "BasicQueue"
+  QueueARN:
+    Description: "ARN of newly created SQS Queue"
+    Value:
+      Fn::GetAtt:
+        - "BasicQueue"
+        - "Arn"
+  QueueName:
+    Description: "Name newly created SQS Queue"
+    Value:
+      Fn::GetAtt:
+        - "BasicQueue"
+        - "QueueName"

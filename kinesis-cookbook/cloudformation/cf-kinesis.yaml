@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "AWS CloudFormation Sample with kinesis"
+Parameters:
+  StreamName:
+    Type: String
+    Default: MyKinesisStream
+    Description: Enter name.
+Resources:
+  MyStream:
+    Type: 'AWS::Kinesis::Stream'
+    Properties:
+      Name: !Ref StreamName
+      RetentionPeriodHours: 168
+      ShardCount: 1
+      Tags:
+        -
+          Key: Environment
+          Value: Dev
+
+Outputs:
+  KinesisName:
+    Description: "Kinesis"
+    Value:
+      Ref: "MyStream"
+  KinesisArn:
+    Description: "Kinesis arn"
+    Value:
+      Fn::GetAtt:
+        - "MyStream"
+        - "Arn"

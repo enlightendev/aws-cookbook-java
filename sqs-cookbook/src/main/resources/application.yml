@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: sqs-app
+server:
+  port: 8080
+
+# queues - urls obtained from cloud formation template output
+aws:
+  sqs:
+    simpleQueueURL: https://sqs.us-east-1.amazonaws.com/XXXX7871YYYY/MySimpleQueue
